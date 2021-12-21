@@ -16,7 +16,6 @@ class RecoSystem:
         """
         pass
 
-
     def scan_landing_page(self, url):
         """
         purpose: scan a landing page url.
@@ -68,7 +67,6 @@ class RecoSystem:
         else:
             return description
 
-
     def extract_keywords_from_landing_page(self, url):
         """
         purpose: extract keywords from  a landing page.
@@ -92,7 +90,10 @@ class RecoSystem:
                     break
 
         if str_of_keywords != "":
-            return str_of_keywords.split(',')
+            res = str_of_keywords.split(',')
+            if len(res) < 5:
+                return res
+            return res[0:5]
 
         # checks if str in part of a title or a header
 
@@ -156,13 +157,20 @@ class RecoSystem:
 
     def scrap_page(self, url):
         title = self.extract_title_from_landing_page(url)
+        if title is None:
+            title = ""
+        else:
+            title = title.text
         description = self.extract_description_from_landing_page(url)
+        if description is None:
+            description = ""
         keywords = self.extract_keywords_from_landing_page(url)
+        if keywords is None:
+            keywords = ""
 
-        return {"title": title.text,
+        return {"title": title,
                 "description": description,
                 "keywords": keywords}
-
 
     def add_scraping_rule(self, new_rule):
         """
