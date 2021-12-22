@@ -25,14 +25,13 @@ class RecoSystem:
 
         # opening the url for reading and parsing the html file
         hdr = {'User-Agent': 'Mozilla/5.0'}
-        req = Request(url, headers=hdr)
         try:
+            req = Request(url, headers=hdr)
             page = urlopen(req)
         except Exception as e:
-            print(e)
             return None, e
         soup = BeautifulSoup(page)
-        return soup, ""
+        return soup, "Success"
 
     def extract_title_from_landing_page(self, url):
         """
@@ -77,7 +76,6 @@ class RecoSystem:
         if htmlParse is None:
             return [e]
         title = htmlParse.find("title")
-        # title = self.extract_title_from_landing_page(url)
         if title is None:
             return ["Exception: Cannot Access url"]
 
