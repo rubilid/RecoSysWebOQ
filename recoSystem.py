@@ -5,6 +5,7 @@ import requests
 import yake as yake
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
+import json
 
 
 class RecoSystem:
@@ -168,9 +169,11 @@ class RecoSystem:
         if keywords is None:
             keywords = ""
 
-        return {"title": title,
+        dict = {"title": title,
                 "description": description,
                 "keywords": keywords}
+
+        return dict
 
     def add_scraping_rule(self, new_rule):
         """
