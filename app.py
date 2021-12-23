@@ -51,6 +51,7 @@ def extract_keywords_from_landing_page():
     flash(Markup(res_txt))
     return render_template("index.html", output=list_of_images)
 
+
 # check2
 if __name__ == '__main__':
     app.run()
